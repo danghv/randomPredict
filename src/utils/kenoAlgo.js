@@ -135,7 +135,7 @@ const isTrue = (result1, result2) => {
         && result1[4] === result2[4]
 }
 
-const getActualResult
+// const getActualResult
 
 export const getCompareResult = (randomType) => {
     let count = 1;
