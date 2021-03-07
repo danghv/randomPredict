@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { generateRandomResult, getCompareResult } from './utils/kenoAlgo';
+import { getCompareResult } from './utils/kenoAlgo';
 import { useEffect } from 'react';
 import slice from 'lodash/slice'
 
@@ -12,7 +12,7 @@ function App() {
     //   console.log('result...reverse....', test.result.result)
     // }
     if(test?.result?.isFalse) {
-      console.log('all result .....', test.result.result)
+      console.log('all result .......', test.result.result)
       console.log('final result .....', slice(test.result.result, 12, 15))
     }
   }, []);

@@ -2,91 +2,27 @@ import random from 'lodash/random'
 import slice from 'lodash/slice'
 
 const TEST_INPUT = [
-    // 77887,
-    // 19298,
-    // 19298,
-    // 72591,
-    // 39945,
-    // 58059,
-    // 46957,
-    // 440,
-    // 20480,
-    // 43119,
-    // 29019,
-    // 81634,
-    // 53288,
-    // 14015,
-    // 94317,
-    // 81332,
-    // 39618,
-    // 11594,
-    // 46115,
-    // 84879,
-    // 67671,
-    // 29988,
-    // 85219,
-    // 5141,
-    // 82555,
-    // 40733,
-    // 30992,
-    // 37815,
-    // 75441,
-    // 49056,
-    // 26026,
-    // 24931,
-    // 97111,
-    // 5916,
-    // 33730,
-    // 52673,
-    // 47345,
-    // 4700,
-    // 1854,
-    // 80734,
-    // 9502,
-    // 49392,
-    // 30851,
-    // 52440,
-    // 23810,
-    // 81754,
-    // 55804,
-    // 6808,
-    // 14562,
-    // 31751,
-    // 29565,
-    // 37453,
-    // 33564,
-    // 69162,
-    // 41276,
-    // 14796,
-    9874,
-    97716,
-    71615,
-    78288,
-    67278,
-    6608,
-    64824,
-    49729,
-    24434,
-    55946,
-    39468,
-    55979
+    317,
+    18953,
+    25210,
+    5458,
+    8568,
+    83979, 77728, 88123, 2022, 78195, 72682, 5883, 64541, 46458, 8933, 46574, 39677, 80553, 39553, 66919
 ]
 
 export const generateRandomResult = () => {
-    const randomInputs = Array.apply(null, {length: 15})
+    const randomInputs = Array.apply(null, {length: 12})
         .map(Function.call, () => random(0, 99999))
-
-    // console.log('randomInputs...........', randomInputs)
     
     const xxx = convertArrayNumberToResult(randomInputs);
     // console.log('convert to text......', xxx)
     return ({
         compare: {
-            tx: slice([...xxx], 0, 15).map(val => val[0]),
+            tx: slice([...xxx], 0, 7).map(val => val[0]),
             cl: slice([...xxx], 0, 5).map(val => val[1]),
         },
         result: {
-            tx: slice([...xxx], 0, 15).map(val => val[0]),
+            tx: slice([...xxx], 0, 12).map(val => val[0]),
             cl: slice([...xxx], 5, 10).map(val => val[1]),
         },
         origin: {
@@ -120,11 +56,6 @@ const isFalse = (result1, result2) => {
         && result1[4] !== result2[4]
         && result1[5] !== result2[5]
         && result1[6] !== result2[6]
-        && result1[7] !== result2[7]
-        && result1[8] !== result2[8]
-        && result1[9] !== result2[9]
-        && result1[10] !== result2[10]
-        && result1[11] !== result2[11]
 }
 
 const isTrue = (result1, result2) => {
@@ -137,20 +68,22 @@ const isTrue = (result1, result2) => {
 
 // const getActualResult
 
+// [...document.getElementById('tbRecentResult').querySelectorAll('tr')].map(item => item.childNodes[1].innerText).splice(1, 20)
+// [...document.getElementById('tbRecentResult').querySelectorAll('tr')].map(item => item.childNodes[1].innerText).splice(1, 20).map(item => Number(item))
+
 export const getCompareResult = (randomType) => {
     let count = 1;
     const randomNumber = 999999;
     let result;
     let randomCount;
     const actualResultArray = convertArrayNumberToResult(TEST_INPUT);
-        // console.log('.....................actualResultArray.............', actualResultArray)
     const actualResult = {
         firtFive: {
             tx: slice([...actualResultArray], 0, 5).map(val => val[0]),
             cl: slice([...actualResultArray], 0, 5).map(val => val[1]),
         },
         lastFive: {
-            tx: slice([...actualResultArray], 0, 12).map(val => val[0]),
+            tx: slice([...actualResultArray], 5, 12).map(val => val[0]),
             cl: slice([...actualResultArray], 5, 10).map(val => val[1]),
         }
     }
@@ -169,40 +102,7 @@ export const getCompareResult = (randomType) => {
                 randomCount = i;
                 break;
             }
-    
-            // if (isTrue(randomResult.compare.tx, actualResult.lastFive.tx)) {
-            //     result = {
-            //         tx: true,
-            //         isTrue: true,
-            //         result: randomResult.result.tx,
-            //     }
-            //     randomCount = i;
-            //     break;
-            // }
         }
-
-        if (randomType === 'CL') {
-            // if (isFalse(randomResult.compare.cl, actualResult.firtFive.cl)) {
-            //     result = {
-            //         cl: true,
-            //         isFalse: true,
-            //         result: randomResult.result.cl,
-            //     }
-            //     randomCount = i;
-            //     break;
-            // }
-
-            if (isFalse(randomResult.compare.cl, actualResult.firtFive.cl)) {
-                result = {
-                    cl: true,
-                    isFalse: true,
-                    result: randomResult.result.cl,
-                }
-                randomCount = i;
-                break;
-            }
-        }
-        
     }
     console.log('random number:.....', randomCount)
     return ({
