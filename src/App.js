@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
-import { getCompareResult, reverseTrue } from './utils/kenoAlgo';
+import { getCompareResult, reverseTrue, intergrateTimeline } from './utils/kenoAlgo';
 import { useEffect } from 'react';
 import slice from 'lodash/slice'
 import moment from 'moment'
 
 function App() {
   useEffect(() => {
-    const test = getCompareResult('TX')
+    // const test = getCompareResult('TX')
     // console.log('test........', test)
     // if(test?.result?.isTrue) {
     //   console.log('result...reverse....', test.result.result)
     // }
-    if(test?.result?.isFalse) {
-      console.log('all result .......', test.result.result)
-      console.log('final result .....', reverseTrue(slice(test.result.result, 9, 16)))
-      // console.log('final result .....', slice(test.result.result, 8, 13))
+    // if(test?.result?.isFalse) {
+    //   console.log('all result .......', test.result.result)
+    //   console.log('final result .....', reverseTrue(slice(test.result.result, 9, 16)))
+    //   // console.log('final result .....', slice(test.result.result, 8, 13))
+    //   console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))
+    // }
+    const finalResult = intergrateTimeline({ compareNumber: 8 })
+    console.log('finalresult............', finalResult)
+    console.log('hit the goal:........', slice(finalResult.finalResult, 1, finalResult.finalResult.length))
       console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))
-    }
   }, []);
 
   return (

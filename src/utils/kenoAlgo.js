@@ -2,30 +2,26 @@ import random from 'lodash/random'
 import slice from 'lodash/slice'
 
 export const TEST_INPUT = [
-    33018, 52815, 82395, 96450, 81859, 13444, 81899, 4615, 89412, 2544, 36737, 34766, 31973, 84278, 92932, 63796, 52276, 29168, 32246, 58140,
-    15906, 41685, 29034, 20490, 72957, 66532, 55543, 80994, 86018, 90219, 58002, 4254, 55711, 97796, 79694,79509, 17135, 7708, 18712, 93907, 13592,
-    1960, 62468, 64820, 47209, 82297, 5709, 43692, 93057, 3917,
-    97796, 79694, 79509, 17135, 7708, 18712, 93907, 13592, 1960, 62468, 64820, 47209, 82297, 5709, 43692, 93057, 3917, 34163, 25220, 6803,
+    91433, 73938, 83961, 39924, 17456, 77887, 92779, 93683, 53974, 58033, 83524, 35471, 39035, 42054, 41312, 50964, 97901, 50677, 92789, 23518,
+    83961, 39924, 17456, 77887, 92779, 93683, 53974, 58033, 83524, 35471, 39035, 42054, 41312, 50964, 97901, 50677, 92789, 23518, 44438, 85118,
+    93683, 53974, 58033, 83524, 35471, 39035, 42054, 41312, 50964, 97901, 50677, 92789, 23518, 44438, 85118, 30583, 11526, 68547, 77319, 84525,
+    47417,
+    50964, 97901, 50677, 92789, 23518, 44438, 85118, 30583, 11526, 68547, 77319, 84525, 47417, 58728, 39033, 87483, 37176, 82224, 39561, 84055,
+    47914, 4171, 91388, 23263, 2851, 2338, 30380
 
 ]
 
-export const generateRandomResult = () => {
-    const randomInputs = Array.apply(null, {length: 16})
+export const generateRandomResult = ({randomNumberResult, compareNumber}) => {
+    const randomInputs = Array.apply(null, {length: randomNumberResult})
         .map(Function.call, () => random(0, 99999))
     
-    const xxx = convertArrayNumberToResult(randomInputs);
-    // console.log('convert to text......', xxx)
+    const result = convertArrayNumberToResult(randomInputs);
     return ({
         compare: {
-            tx: slice([...xxx], 0, 9).map(val => val[0]),
-            cl: slice([...xxx], 0, 5).map(val => val[1]),
+            tx: slice(result, 0, compareNumber).map(val => val[0]),
         },
         result: {
-            tx: slice([...xxx], 0, 16).map(val => val[0]),
-            cl: slice([...xxx], 5, 10).map(val => val[1]),
-        },
-        origin: {
-
+            tx: slice(result, 0, randomNumberResult).map(val => val[0]),
         }
     })
 }
@@ -67,7 +63,6 @@ const isTrue = (result1, result2) => {
         && result1[5] === result2[5]
         && result1[6] === result2[6]
         && result1[7] === result2[7]
-        && result1[8] === result2[8]
 }
 
 export const reverseTrue = trueCompareResult => trueCompareResult.map(res => res === 'T' ? 'X' : 'T');
@@ -77,29 +72,18 @@ export const reverseTrue = trueCompareResult => trueCompareResult.map(res => res
 // [...document.getElementById('tbRecentResult').querySelectorAll('tr')].map(item => item.childNodes[1].innerText).splice(1, 20)
 // [...document.getElementById('tbRecentResult').querySelectorAll('tr')].map(item => item.childNodes[1].innerText).splice(1, 20).map(item => Number(item))
 
-export const getCompareResult = (randomType) => {
+export const getCompareResult = ({compareNumber, actualCompareResult}) => {
     let count = 1;
     const randomNumber = 999999;
     let result;
     let randomCount;
-    const actualResultArray = convertArrayNumberToResult(TEST_INPUT);
-    const actualResult = {
-        firtFive: {
-            tx: slice([...actualResultArray], 0, 5).map(val => val[0]),
-            cl: slice([...actualResultArray], 0, 5).map(val => val[1]),
-        },
-        lastFive: {
-            tx: slice([...actualResultArray], TEST_INPUT.length - 9, TEST_INPUT.length).map(val => val[0]),
-            cl: slice([...actualResultArray], 5, 10).map(val => val[1]),
-        }
-    }
-    console.log('actual result......', actualResult.lastFive.tx)
+    const actualResult = convertArrayNumberToResult(actualCompareResult).map(val => val[0])
+    // console.log('actual result......', actualResult)
 
     for (let i = count; i < randomNumber; i ++) {
-        const randomResult = generateRandomResult();
+        const randomResult = generateRandomResult({ randomNumberResult: 15, compareNumber: 8 });
 
-        if (randomType === 'TX') {
-            // if (isFalse(randomResult.compare.tx, actualResult.lastFive.tx)) {
+        // if (isFalse(randomResult.compare.tx, actualResult.lastFive.tx)) {
             //     result = {
             //         tx: true,
             //         isFalse: true,
@@ -109,20 +93,57 @@ export const getCompareResult = (randomType) => {
             //     break;
             // }
 
-            if (isTrue(randomResult.compare.tx, actualResult.lastFive.tx)) {
-                result = {
-                    tx: true,
-                    isFalse: true,
-                    result: randomResult.result.tx,
-                }
+            if (isTrue(randomResult.compare.tx, actualResult)) {
+                result = randomResult.result.tx
                 randomCount = i;
                 break;
             }
-        }
     }
-    console.log('random number:.....', randomCount)
+    // console.log('random number:.....', randomCount)
     return ({
         result,
         randomCount
     });
+}
+
+export const intergrateTimeline = ({compareNumber}) => {
+    let finalResult = [];
+    let finalCount = 0;
+    const lastThreeTestInput = convertArrayNumberToResult(slice(TEST_INPUT, TEST_INPUT.length - 3, TEST_INPUT.length)).map(item => item[0])
+    // console.log('lastThreeTestInput.......', lastThreeTestInput)
+
+    for(let i = 0; i < 99999999; i ++) {
+        const firstTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(TEST_INPUT, TEST_INPUT.length - compareNumber, TEST_INPUT.length) })
+    const secondTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(TEST_INPUT, TEST_INPUT.length - compareNumber - 1, TEST_INPUT.length - 1) })
+    const thirdTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(TEST_INPUT, TEST_INPUT.length - compareNumber - 2, TEST_INPUT.length - 2) })
+
+    // console.log('.........', firstTimeline, secondTimeline, thirdTimeline)
+
+    const firstTimelineResult = slice(firstTimeline.result, compareNumber, firstTimeline.result.length)
+    const secondTimelineResult = slice(secondTimeline.result, compareNumber, secondTimeline.result.length)
+    const thirdTimelineResult = slice(thirdTimeline.result, compareNumber, thirdTimeline.result.length)
+    // console.log('all result timeline', firstTimelineResult, secondTimelineResult, thirdTimelineResult)
+    // const lastThreeTestInput = convertArrayNumberToResult(slice(TEST_INPUT, TEST_INPUT.length - 3, TEST_INPUT.length)).map(item => item[0])
+    // console.log('lastThreeTestInput.......', lastThreeTestInput)
+
+    if(
+        thirdTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 3]
+        && thirdTimelineResult[1] !== lastThreeTestInput[lastThreeTestInput.length - 2]
+        && thirdTimelineResult[2] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+        && thirdTimelineResult[3] === firstTimelineResult[0]
+        && thirdTimelineResult[4] === firstTimelineResult[1]
+        && secondTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 2]
+        && secondTimelineResult[1] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+        && secondTimelineResult[2] === firstTimelineResult[0]
+        && secondTimelineResult[3] === firstTimelineResult[1]
+        && firstTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+    ) {
+        finalResult = firstTimelineResult;
+        finalCount = i
+        break;
+    }
+    }
+
+    return {finalResult, finalCount}
+
 }
