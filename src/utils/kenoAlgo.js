@@ -1,14 +1,9 @@
 import random from 'lodash/random'
 import slice from 'lodash/slice'
+import { findRenderedComponentWithType } from 'react-dom/test-utils'
 
 export const TEST_INPUT = [
-    91433, 73938, 83961, 39924, 17456, 77887, 92779, 93683, 53974, 58033, 83524, 35471, 39035, 42054, 41312, 50964, 97901, 50677, 92789, 23518,
-    83961, 39924, 17456, 77887, 92779, 93683, 53974, 58033, 83524, 35471, 39035, 42054, 41312, 50964, 97901, 50677, 92789, 23518, 44438, 85118,
-    93683, 53974, 58033, 83524, 35471, 39035, 42054, 41312, 50964, 97901, 50677, 92789, 23518, 44438, 85118, 30583, 11526, 68547, 77319, 84525,
-    47417,
-    50964, 97901, 50677, 92789, 23518, 44438, 85118, 30583, 11526, 68547, 77319, 84525, 47417, 58728, 39033, 87483, 37176, 82224, 39561, 84055,
-    47914, 4171, 91388, 23263, 2851, 2338, 30380
-
+    80006, 40512, 86274, 83285, 41957, 54816, 28041, 99230, 24864, 78157, 81765, 18444, 57345, 7162, 55776, 83765, 43208, 15913, 64069, 24589
 ]
 
 export const generateRandomResult = ({randomNumberResult, compareNumber}) => {
@@ -26,14 +21,14 @@ export const generateRandomResult = ({randomNumberResult, compareNumber}) => {
     })
 }
 
-const fromNumberToResult = (number) => {
+export const fromNumberToResult = (number) => {
     return number
         .toString()
         .split('')
         .reduce((acc, currentNumberStr) => acc + Number(currentNumberStr), 0)
 }
 
-const convertArrayNumberToResult = arrayNumber => arrayNumber
+export const convertArrayNumberToResult = arrayNumber => arrayNumber
     .map(num => fromNumberToResult(num))
     .map(number => {
         if(number >= 23 && (number % 2) === 0) return 'TC'
@@ -51,7 +46,8 @@ const isFalse = (result1, result2) => {
         && result1[4] !== result2[4]
         && result1[5] !== result2[5]
         && result1[6] !== result2[6]
-        && result1[7] !== result2[7]
+        // && result1[7] !== result2[7]
+        // && result1[8] !== result2[8]
 }
 
 const isTrue = (result1, result2) => {
@@ -106,44 +102,61 @@ export const getCompareResult = ({compareNumber, actualCompareResult}) => {
     });
 }
 
-export const intergrateTimeline = ({compareNumber}) => {
+export const intergrateTimeline = ({compareNumber, actualInput}) => {
     let finalResult = [];
     let finalCount = 0;
-    const lastThreeTestInput = convertArrayNumberToResult(slice(TEST_INPUT, TEST_INPUT.length - 3, TEST_INPUT.length)).map(item => item[0])
-    // console.log('lastThreeTestInput.......', lastThreeTestInput)
+    let first, second, third;
+    const lastThreeTestInput = convertArrayNumberToResult(slice(actualInput, actualInput.length - 3, actualInput.length)).map(item => item[0])
+    // console.log('lastThreeTestInput.......', lastThreeTestInput, slice(actualInput, actualInput.length - compareNumber, actualInput.length))
 
     for(let i = 0; i < 99999999; i ++) {
-        const firstTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(TEST_INPUT, TEST_INPUT.length - compareNumber, TEST_INPUT.length) })
-    const secondTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(TEST_INPUT, TEST_INPUT.length - compareNumber - 1, TEST_INPUT.length - 1) })
-    const thirdTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(TEST_INPUT, TEST_INPUT.length - compareNumber - 2, TEST_INPUT.length - 2) })
+        const firstTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(actualInput, actualInput.length - compareNumber, actualInput.length) })
+        const secondTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(actualInput, actualInput.length - compareNumber - 1, actualInput.length - 1) })
+        const thirdTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(actualInput, actualInput.length - compareNumber - 2, actualInput.length - 2) })
+        const fourthTimeline = getCompareResult({ compareNumber, actualCompareResult: slice(actualInput, actualInput.length - compareNumber - 3, actualInput.length - 3) })
 
     // console.log('.........', firstTimeline, secondTimeline, thirdTimeline)
 
-    const firstTimelineResult = slice(firstTimeline.result, compareNumber, firstTimeline.result.length)
-    const secondTimelineResult = slice(secondTimeline.result, compareNumber, secondTimeline.result.length)
-    const thirdTimelineResult = slice(thirdTimeline.result, compareNumber, thirdTimeline.result.length)
+    const firstTimelineResult = reverseTrue(slice(firstTimeline.result, compareNumber, firstTimeline.result.length))
+    const secondTimelineResult = reverseTrue(slice(secondTimeline.result, compareNumber, secondTimeline.result.length))
+    const thirdTimelineResult = reverseTrue(slice(thirdTimeline.result, compareNumber, thirdTimeline.result.length))
+    const fourthTimelineResult = reverseTrue(slice(fourthTimeline.result, compareNumber, fourthTimeline.result.length))
     // console.log('all result timeline', firstTimelineResult, secondTimelineResult, thirdTimelineResult)
     // const lastThreeTestInput = convertArrayNumberToResult(slice(TEST_INPUT, TEST_INPUT.length - 3, TEST_INPUT.length)).map(item => item[0])
     // console.log('lastThreeTestInput.......', lastThreeTestInput)
 
     if(
-        thirdTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 3]
-        && thirdTimelineResult[1] !== lastThreeTestInput[lastThreeTestInput.length - 2]
-        && thirdTimelineResult[2] !== lastThreeTestInput[lastThreeTestInput.length - 1]
-        && thirdTimelineResult[3] === firstTimelineResult[0]
-        && thirdTimelineResult[4] === firstTimelineResult[1]
-        && secondTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 2]
-        && secondTimelineResult[1] !== lastThreeTestInput[lastThreeTestInput.length - 1]
-        && secondTimelineResult[2] === firstTimelineResult[0]
-        && secondTimelineResult[3] === firstTimelineResult[1]
-        && firstTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+        // thirdTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 3]
+        // && thirdTimelineResult[1] !== lastThreeTestInput[lastThreeTestInput.length - 2]
+        // && thirdTimelineResult[2] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+        // && thirdTimelineResult[3] === firstTimelineResult[0]
+        // && thirdTimelineResult[4] === firstTimelineResult[1]
+        // && secondTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 2]
+        // && secondTimelineResult[1] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+        // && secondTimelineResult[2] === firstTimelineResult[0]
+        // && secondTimelineResult[3] === firstTimelineResult[1]
+        // && firstTimelineResult[0] !== lastThreeTestInput[lastThreeTestInput.length - 1]
+        fourthTimelineResult[0] !== lastThreeTestInput[0]
+        && fourthTimelineResult[1] !== lastThreeTestInput[1]
+        && fourthTimelineResult[2] !== lastThreeTestInput[2]
+        && thirdTimelineResult[0] !== lastThreeTestInput[1]
+        && thirdTimelineResult[1] !== lastThreeTestInput[2]
+        && secondTimelineResult[0] !== lastThreeTestInput[2]
+
+        && fourthTimelineResult[3] === thirdTimelineResult[2]
+        && thirdTimelineResult[2] === secondTimelineResult[1]
+        && secondTimelineResult[1] === firstTimelineResult[0]
+
     ) {
         finalResult = firstTimelineResult;
-        finalCount = i
+        finalCount = i;
+        first = firstTimelineResult
+        second = secondTimelineResult
+        third = thirdTimelineResult
         break;
     }
     }
 
-    return {finalResult, finalCount}
+    return {finalResult, finalCount, first, second, third}
 
 }
