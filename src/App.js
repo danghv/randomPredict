@@ -1,15 +1,18 @@
+/* eslint-disable no-unused-vars */
 import logo from './logo.svg';
 import './App.css';
-import { getCompareResult, reverseTrue, intergrateTimeline, TEST_INPUT } from './utils/kenoAlgo';
+import { getCompareResult, reverseTrue, intergrateTimeline, TEST_INPUT, randomTimeline } from './utils/kenoAlgo';
 // import { getCompareResult, reverseTrue, TEST_INPUT } from './utils/kenoAlgo';
-import { getPredictResult, justRandomResult, testLottery, testLotteryRandom, testMultiTimeline } from './utils/testKeno'
+import { getPredictResult, justRandomResult, testLottery, testLotteryRandom, testMultiTimeline, testRandomTimeline } from './utils/testKeno'
 import { useEffect } from 'react';
 import slice from 'lodash/slice'
 import moment from 'moment'
 
 function App() {
   useEffect(() => {
-    // const test = testMultiTimeline()
+    const test = randomTimeline({ actualInput: TEST_INPUT });
+    console.log('test.....', test, test.finalResult[1])
+    // const test = testRandomTimeline()
     // console.log('test........', test)
     // if(test?.result?.isTrue) {
     //   console.log('result...reverse....', test.result.result)
@@ -20,9 +23,9 @@ function App() {
     //   // console.log('final result .....', slice(test.result.result, 8, 13))
     //   console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))
     // }
-    const finalResult = intergrateTimeline({ compareNumber: 8, actualInput: TEST_INPUT })
-    console.log('finalresult............', finalResult)
-    console.log('hit the goal:........', slice(finalResult.finalResult, 0, finalResult.finalResult.length))
+    // const finalResult = intergrateTimeline({ compareNumber: 8, actualInput: TEST_INPUT })
+    // console.log('finalresult............', finalResult)
+    // console.log('hit the goal:........', slice(finalResult.finalResult, 0, finalResult.finalResult.length))
     console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))
   }, []);
 

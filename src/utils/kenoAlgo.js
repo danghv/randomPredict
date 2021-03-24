@@ -3,7 +3,10 @@ import slice from 'lodash/slice'
 import { findRenderedComponentWithType } from 'react-dom/test-utils'
 
 export const TEST_INPUT = [
-    80006, 40512, 86274, 83285, 41957, 54816, 28041, 99230, 24864, 78157, 81765, 18444, 57345, 7162, 55776, 83765, 43208, 15913, 64069, 24589
+    48308, 4715, 4768, 59176, 2224, 88228, 2085, 13019, 50428, 37934, 95533, 54836, 42829, 74693, 44540, 81829, 95939, 72644, 56839, 79711,
+    50033, 37938, 91653, 84036, 1741, 45677, 88992, 10565,
+    85998, 96856, 62741, 69846, 51246, 49900, 7141, 88378, 33120, 70092, 95512, 27770, 13757, 37036, 48878, 73570, 14567, 50394, 23341, 64336, 23067, 62870,
+    53780, 16883, 13210, 5508, 86078, 20529, 80338, 24015,
 ]
 
 export const generateRandomResult = ({randomNumberResult, compareNumber}) => {
@@ -160,3 +163,72 @@ export const intergrateTimeline = ({compareNumber, actualInput}) => {
     return {finalResult, finalCount, first, second, third}
 
 }
+
+export const randomTimeline = ({ actualInput}) => {
+    // console.log('......', actualInput)
+    let finalResult = [];
+    let finalCount = 0;
+    let first, second, third, fourth;
+    const lastThreeTestInput = convertArrayNumberToResult(slice(actualInput, actualInput.length - 5, actualInput.length)).map(item => item[0])
+    
+    // console.log('actualResultToTest, actualResultToTest', actualInput, lastThreeTestInput)
+    // const actualResultToTestString = convertArrayNumberToResult(actualInput).map(item => item[0])
+
+    for(let i = 0; i < 9999999; i++) {
+        const randomResults = Array.apply(null, {length: 6})
+            .map(Function.call, () => random(0, 99999))
+        const compareResult = convertArrayNumberToResult(randomResults).map(item => item[0])
+
+        const randomResults1 = Array.apply(null, {length: 6})
+            .map(Function.call, () => random(0, 99999))
+        const compareResult1 = convertArrayNumberToResult(randomResults1).map(item => item[0])
+        // console.log('compareResult1.....', compareResult1)
+
+        const randomResults2 = Array.apply(null, {length: 6})
+            .map(Function.call, () => random(0, 99999))
+        const compareResult2 = convertArrayNumberToResult(randomResults2).map(item => item[0])
+
+        const randomResults3 = Array.apply(null, {length: 6})
+            .map(Function.call, () => random(0, 99999))
+        const compareResult3 = convertArrayNumberToResult(randomResults3).map(item => item[0])
+
+        const randomResults4 = Array.apply(null, {length: 6})
+            .map(Function.call, () => random(0, 99999))
+        const compareResult4 = convertArrayNumberToResult(randomResults4).map(item => item[0])
+        if (compareResult4[0] !== lastThreeTestInput[0]
+            && compareResult4[1] !== lastThreeTestInput[1]
+            && compareResult4[2] !== lastThreeTestInput[2]
+            && compareResult4[3] !== lastThreeTestInput[3]
+            && compareResult4[4] !== lastThreeTestInput[4]
+
+            && compareResult3[0] !== lastThreeTestInput[1]
+            && compareResult3[1] !== lastThreeTestInput[2]
+            && compareResult3[2] !== lastThreeTestInput[3]
+            && compareResult3[3] !== lastThreeTestInput[4]
+
+            && compareResult2[0] !== lastThreeTestInput[2]
+            && compareResult2[1] !== lastThreeTestInput[3]
+            && compareResult2[2] !== lastThreeTestInput[4]
+
+            && compareResult1[0] !== lastThreeTestInput[3]
+            && compareResult1[1] !== lastThreeTestInput[4]
+
+            && compareResult[0] !== lastThreeTestInput[4]
+    
+            && compareResult4[5] === compareResult3[4]
+            && compareResult3[4] === compareResult2[3]
+            && compareResult2[3] === compareResult1[2]
+            && compareResult1[2] === compareResult[1]) {
+                finalResult = compareResult;
+                finalCount = i;
+                first = compareResult1
+                second = compareResult2
+                third = compareResult3
+                fourth = compareResult4
+                break;
+        }
+    }
+
+    return {finalResult, finalCount, first, second, third, fourth, lastThreeTestInput}
+}
+

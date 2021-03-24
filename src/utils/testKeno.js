@@ -1,4 +1,4 @@
-import { TEST_INPUT, getCompareResult, reverseTrue, convertArrayNumberToResult, intergrateTimeline } from './kenoAlgo'
+import { TEST_INPUT, getCompareResult, reverseTrue, convertArrayNumberToResult, intergrateTimeline, randomTimeline } from './kenoAlgo'
 import slice from 'lodash/slice'
 import random from 'lodash/random'
 import { data, something } from './xosomb'
@@ -118,11 +118,11 @@ export const justRandomResult = () => {
             continue;
         }
 
-        if (actualResultToTestString[2] === compareResult[2]) {
-            totalWinCases += 1;
-            winAtThird += 1;
-            continue;
-        }
+        // if (actualResultToTestString[2] === compareResult[2]) {
+        //     totalWinCases += 1;
+        //     winAtThird += 1;
+        //     continue;
+        // }
 
         // if (actualResultToTestString[3] === compareResult[3]) {
         //     totalWinCases += 1;
@@ -232,7 +232,7 @@ export const testLotteryRandom = () => {
 }
 
 export const testMultiTimeline = () => {
-    const totalTestcases = TEST_INPUT.length - 8 + 1 - 3;
+    const totalTestcases = TEST_INPUT.length + 1 - 3;
     let totalWinCases = 0;
     let winAtFirst = 0;
     let winAtSecond = 0;
@@ -244,6 +244,7 @@ export const testMultiTimeline = () => {
         // console.log('compareResult...', compareResult)
         const actualResultToTest = slice(TEST_INPUT, i + 8, i + 8 + 3)
         const actualResultToTestString = convertArrayNumberToResult(actualResultToTest).map(item => item[0])
+        console.log('actualResultToTestString...... and compare result....', actualResultToTestString, compareResult)
 
         if (actualResultToTestString[0] === compareResult[0]) {
             totalWinCases += 1;
@@ -266,5 +267,56 @@ export const testMultiTimeline = () => {
         totalTestcases,
         percenWin: totalWinCases / totalTestcases * 100,
         percentFirtWin: winAtFirst / totalTestcases * 100,
+    })
+}
+
+export const testRandomTimeline = () => {
+    const totalTestcases = TEST_INPUT.length - 7 + 1;
+    // console.log('totalTestcases/////////', totalTestcases)
+    let totalWinCases = 0;
+    let winAtFirst = 0;
+    let winAtSecond = 0;
+    let winAtThird = 0;
+    let winAtFourth = 0;
+    let winAtFifth = 0;
+    let winAtSixth = 0;
+    let winAtSeven = 0;
+    let winAtEight = 0;
+
+    for(let i = 0; i < totalTestcases; i++) {
+        const testResult = randomTimeline({actualInput: slice([...TEST_INPUT], i, i + 6)});
+        // console.log('test result....', testResult)
+        // const compareResult = slice(testResult.finalResult, 1, testResult.finalResult.length)
+        // console.log('compareResult...', compareResult)
+        const actualResultToTest = slice(TEST_INPUT, i, i + 6)
+        const actualResultToTestString = convertArrayNumberToResult(actualResultToTest).map(item => item[0])
+        // console.log('actualResultToTestString', actualResultToTestString, actualResultToTestString[actualResultToTestString.length - 3])
+        // console.log('actualResultToTestString...... and compare result....', actualResultToTestString, testResult)
+
+        if (actualResultToTestString[actualResultToTestString.length - 1] === testResult.finalResult[1]) {
+            totalWinCases += 1;
+            // winAtFirst += 1;
+            continue;
+        }
+
+    }
+
+    return ({
+        totalWinCases,
+        // winAtFirst,
+        // winAtSecond,
+        // winAtThird,
+        // winAtFourth,
+        // winAtFifth,
+        // winAtSixth,
+        // winAtSeven,
+        // winAtEight,
+        totalTestcases,
+        percentWin: totalWinCases / totalTestcases * 100,
+        // percentFirtWin: winAtFirst / totalTestcases * 100,
+        // percentSecondWin: winAtSecond / totalTestcases * 100,
+        // percentThirdWin: winAtThird / totalTestcases * 100,
+        // percentFourWin: winAtFourth / totalTestcases * 100,
+        // percentFiveWin: winAtFifth / totalTestcases * 100,
     })
 }
