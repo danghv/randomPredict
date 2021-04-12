@@ -1,6 +1,10 @@
 import random from 'lodash/random'
 import slice from 'lodash/slice'
 
+// [...document.getElementsByClassName('sticky-col at2RMainList')[0].childNodes[1].childNodes].splice(0, 100).map(item => {
+//     return item.outerText.split('	').splice(1, 5)
+// })
+
 export const TEST_INPUT = [
     33018, 52815, 82395, 96450, 81859, 13444, 81899, 4615, 89412, 2544, 36737, 34766, 31973, 84278, 92932, 63796, 52276, 29168, 32246, 58140,
     15906, 41685, 29034, 20490, 72957, 66532, 55543, 80994, 86018, 90219, 58002, 4254, 55711, 97796, 79694,79509, 17135, 7708, 18712, 93907, 13592,
