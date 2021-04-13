@@ -241,4 +241,4 @@ export const whatNgauHam = input => {
             return 'Ngau - Le'
         }
     }
-  }
+}

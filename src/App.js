@@ -7,6 +7,7 @@ import moment from 'moment'
 import axios from 'axios';
 import { result } from 'lodash';
 import Timeline from './components/Timeline';
+import 'antd/dist/antd.css';
 
 function App() {
   useEffect(() => {

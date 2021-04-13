@@ -1,29 +1,5 @@
 import {isNotNgauHam, whatNgauHam, isFiveOfAKind, isFourOfAKind, isThreeOfAKind, isStraight, isFullHouse, isOnePair, isTwoPair} from '../utils/convertToKeo';
-
-const data = [
-    {
-      value1: "R",
-      value2: "R",
-      value3: "R",
-      value4: "R",
-      value5: "R",
-      value6: "R",
-    },
-    {
-      value1: "R",
-      value2: "R",
-      value3: "R",
-      value4: "R",
-    },
-    {
-      value1: "R",
-      value2: "R",
-      value3: "R",
-      value4: "R",
-      value5: "R",
-      value6: "R",
-    },
-  ];
+import { breaks } from '../stores/break'
 
 const checkTypeOfTimeline = (type, number) => {
     const numberFormat = number.split('').map(item => Number(item))
@@ -88,6 +64,66 @@ const checkTypeOfTimeline = (type, number) => {
         return 'Số Rời'
     }
 
+    if(type === 'ONE_TX') {
+        return numberFormat[4] >= 5
+            ? 'T'
+            : 'X'
+    }
+
+    if(type === 'ONE_CL') {
+        return numberFormat[4] % 2 === 0
+            ? 'C'
+            : 'L'
+    }
+
+    if(type === 'TEN_TX') {
+        return numberFormat[3] >= 5
+            ? 'T'
+            : 'X'
+    }
+
+    if(type === 'TEN_CL') {
+        return numberFormat[3] % 2 === 0
+            ? 'C'
+            : 'L'
+    }
+
+    if(type === 'HUNDRED_TX') {
+        return numberFormat[2] >= 5
+            ? 'T'
+            : 'X'
+    }
+
+    if(type === 'HUNDRED_CL') {
+        return numberFormat[2] % 2 === 0
+            ? 'C'
+            : 'L'
+    }
+
+    if(type === 'THOUSAND_TX') {
+        return numberFormat[1] >= 5
+            ? 'T'
+            : 'X'
+    }
+
+    if(type === 'THOUSAND_CL') {
+        return numberFormat[1] % 2 === 0
+            ? 'C'
+            : 'L'
+    }
+
+    if(type === 'TEN_THOUSAND_TX') {
+        return numberFormat[0] >= 5
+            ? 'T'
+            : 'X'
+    }
+
+    if(type === 'TEN_THOUSAND_CL') {
+        return numberFormat[0] % 2 === 0
+            ? 'C'
+            : 'L'
+    }
+
 }
 
 export const convertResultToText = ({ type, data }) => {
@@ -97,24 +133,60 @@ export const convertResultToText = ({ type, data }) => {
 export const genTimeline = values => {
     const xxx = []
     let temp = {}
+    let count = 0;
 
     values.forEach((value, index) => {
         if (index === 0) {
             temp['value1'] = value
         } else {
             if(value !== values[index - 1]) {
+                if (count === 3) {
+                    breaks.breakAtThree += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 4) {
+                    breaks.breakAtFour += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 5) {
+                    breaks.breakAtFive += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 6) {
+                    breaks.breakAtSix += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 7) {
+                    breaks.breakAtSeven += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 8) {
+                    breaks.breakAtEight += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 9) {
+                    breaks.breakAtNine += 1;
+                    // console.log(temp, count)
+                }
+                if (count === 10) {
+                    breaks.breakAtTen += 1;
+                    // console.log(temp, count)
+                }
+                count = 0;
                 xxx.push(temp)
                 temp = {value1: value}
             } else if(value === values[index - 1] && Object.keys(temp).length === 6) {
+                count += 1
                 xxx.push(temp)
                 temp = {value1: value}
             } else {
+                count += 1
                 const nextKey = `value${Object.keys(temp).length + 1}`
                 temp[nextKey] = value
             }
 
             if(index === values.length - 1) {
-                console.log('i am here')
+                // console.log('i am here')
                 xxx.push(temp)
                 // temp = {value1: value}
             }
