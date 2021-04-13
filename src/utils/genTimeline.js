@@ -19,14 +19,14 @@ const checkTypeOfTimeline = (type, number) => {
         const tenThousand = number.split('')[0]
         const one = number.split('')[4]
         return tenThousand === one
-            ? 'HOA'
+            ? 'Hoà'
             : (tenThousand > one ? 'R' : 'H')
     }
 
     if(type === 'NH') {
         const isNotNH = isNotNgauHam(number)
         if (isNotNH) {
-            return 'Khong - Ngau'
+            return 'Ko-N'
         }
         
         return whatNgauHam(number)
@@ -34,15 +34,15 @@ const checkTypeOfTimeline = (type, number) => {
 
     if(type === 'Poker') {
         if(isFiveOfAKind(number)) {
-            return '5 Con'
+            return 'N-Quý'
         }
 
         if(isFourOfAKind(number)) {
-            return 'Tứ Quý'
+            return 'T-Quý'
         }
 
         if(isFullHouse(number)) {
-            return 'Cù Lũ'
+            return 'C-Lũ'
         }
 
         if(isStraight(number)) {
@@ -50,18 +50,18 @@ const checkTypeOfTimeline = (type, number) => {
         }
 
         if(isThreeOfAKind(number)) {
-            return 'Sám Cô'
+            return 'S-C'
         }
 
         if(isTwoPair(number)) {
-            return '2 Đôi'
+            return '2Đ'
         }
 
         if(isOnePair(number)) {
-            return '1 Đôi'
+            return '1Đ'
         }
         
-        return 'Số Rời'
+        return 'SR'
     }
 
     if(type === 'ONE_TX') {

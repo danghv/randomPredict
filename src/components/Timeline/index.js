@@ -170,25 +170,25 @@ const Timeline = () => {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <h3>Tài - Xỉu</h3>
-          <Table columns={columns} dataSource={tx} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={tx} pagination={false} />
         </div>
         <div>
           <h3>Chẵn - Lẻ</h3>
-          <Table columns={columns} dataSource={cl} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={cl} pagination={false} />
         </div>
         <div>
           <h3>Rồng - Hổ</h3>
-          <Table columns={columns} dataSource={rh} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={rh} pagination={false} />
         </div>
 
         <div>
           <h3>Ngầu - Hầm</h3>
-          <Table columns={columns} dataSource={nh} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={nh} pagination={false} />
         </div>
 
         <div>
           <h3>Poker</h3>
-          <Table columns={columns} dataSource={pk} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={pk} pagination={false} />
         </div>
       </div>
         )
@@ -199,46 +199,46 @@ const Timeline = () => {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <h3>Đơn Vị - TX</h3>
-          <Table columns={columns} dataSource={dv_tx} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={dv_tx} pagination={false} />
         </div>
         <div>
           <h3>Đơn Vị - CL</h3>
-          <Table columns={columns} dataSource={dv_cl} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={dv_cl} pagination={false} />
         </div>
         <div>
           <h3>Chục - TX</h3>
-          <Table columns={columns} dataSource={chuc_tx} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={chuc_tx} pagination={false} />
         </div>
         <div>
           <h3>Chục - CL</h3>
-          <Table columns={columns} dataSource={chuc_cl} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={chuc_cl} pagination={false} />
         </div>
         <div>
           <h3>Trăm - TX</h3>
-          <Table columns={columns} dataSource={tram_tx} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={tram_tx} pagination={false} />
         </div>
         <div>
           <h3>Trăm - CL</h3>
-          <Table columns={columns} dataSource={tram_cl} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={tram_cl} pagination={false} />
         </div>
 
         <div>
           <h3>Ngàn - TX</h3>
-          <Table columns={columns} dataSource={ngan_tx} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={ngan_tx} pagination={false} />
         </div>
         <div>
           <h3>Ngàn - CL</h3>
-          <Table columns={columns} dataSource={ngan_cl} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={ngan_cl} pagination={false} />
         </div>
 
         <div>
           <h3>Chục Ngàn - TX</h3>
-          <Table columns={columns} dataSource={cn_tx} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={cn_tx} pagination={false} />
         </div>
 
         <div>
           <h3>Chục Ngàn - CL</h3>
-          <Table columns={columns} dataSource={cn_cl} pagination={false} />
+          <Table bordered size="small" columns={columns} dataSource={cn_cl} pagination={false} />
         </div>
       </div>
         )
@@ -249,7 +249,7 @@ const Timeline = () => {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <h3>Tiền Tam - TX</h3>
-          <Table columns={columns} dataSource={dv_tx} pagination={false} />
+          <Table size="small" columns={columns} dataSource={dv_tx} pagination={false} />
         </div>
         <div>
           <h3>Tiền Tam - CL</h3>

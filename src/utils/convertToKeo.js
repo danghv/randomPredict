@@ -64,181 +64,181 @@ export const whatNgauHam = input => {
 
     if ((arr[0] + arr[1] + arr[2]) % 10 === 0) {
         if(Math.abs(arr[3] + arr[4] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[3] + arr[4] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[3] + arr[4] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[3] + arr[4] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 
     if ((arr[0] + arr[1] + arr[3]) % 10 === 0) {
         if(Math.abs(arr[2] + arr[4] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[2] + arr[4] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[2] + arr[4] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[2] + arr[4] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 
     if ((arr[0] + arr[1] + arr[4]) % 10 !== 0) {
         if(Math.abs(arr[2] + arr[3] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[2] + arr[3] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[2] + arr[3] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[2] + arr[3] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'Ng-Le'
         }
     }
 
     if((arr[0] + arr[2] + arr[3]) % 10 === 0) {
         if(Math.abs(arr[1] + arr[4] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'Ng-Tai'
         }
 
         if(Math.abs(arr[1] + arr[4] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'Ng-Xiu'
         }
 
         if((arr[1] + arr[4] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'Ng-Chan'
         }
 
         if((arr[1] + arr[4] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'Ng-Le'
         }
     }
 
     if((arr[0] + arr[2] + arr[4]) % 10 === 0) {
         if(Math.abs(arr[1] + arr[3] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'Ng-Tai'
         }
 
         if(Math.abs(arr[1] + arr[3] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'Ng-Xiu'
         }
 
         if((arr[1] + arr[3] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'Ng-Chan'
         }
 
         if((arr[1] + arr[3] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'Ng-Le'
         }
     }
 
     if((arr[0] + arr[3] + arr[4]) % 10 === 0) {
         if(Math.abs(arr[1] + arr[2] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[1] + arr[2] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[1] + arr[2] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[1] + arr[2] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 
     if((arr[1] + arr[2] + arr[3]) % 10 === 0) {
         if(Math.abs(arr[0] + arr[4] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[0] + arr[4] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[0] + arr[4] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[0] + arr[4] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 
     if((arr[1] + arr[2] + arr[4]) % 10 === 0) {
         if(Math.abs(arr[0] + arr[3] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[0] + arr[3] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[0] + arr[3] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[0] + arr[3] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 
     if((arr[1] + arr[3] + arr[4]) % 10 === 0) {
         if(Math.abs(arr[0] + arr[2] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[0] + arr[2] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[0] + arr[2] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[0] + arr[2] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 
     if((arr[2] + arr[3] + arr[4]) % 10 !== 0) {
         if(Math.abs(arr[0] + arr[1] - 10) > 4) {
-            return 'Ngau - Tai'
+            return 'N-Tai'
         }
 
         if(Math.abs(arr[0] + arr[1] - 10) <= 4) {
-            return 'Ngau - Xiu'
+            return 'N-Xiu'
         }
 
         if((arr[0] + arr[1] - 10) % 2 === 0) {
-            return 'Ngau - Chan'
+            return 'N-Chan'
         }
 
         if((arr[0] + arr[1] - 10) % 2 !== 0) {
-            return 'Ngau - Le'
+            return 'N-Le'
         }
     }
 }
